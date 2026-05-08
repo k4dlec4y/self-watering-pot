@@ -51,17 +51,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=main.c m_uart.c buttons.c
+SOURCEFILES_QUOTED_IF_SPACED=main.c m_uart.c buttons.c humidity_adc.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/main.o ${OBJECTDIR}/m_uart.o ${OBJECTDIR}/buttons.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/main.o.d ${OBJECTDIR}/m_uart.o.d ${OBJECTDIR}/buttons.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/main.o ${OBJECTDIR}/m_uart.o ${OBJECTDIR}/buttons.o ${OBJECTDIR}/humidity_adc.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/main.o.d ${OBJECTDIR}/m_uart.o.d ${OBJECTDIR}/buttons.o.d ${OBJECTDIR}/humidity_adc.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/main.o ${OBJECTDIR}/m_uart.o ${OBJECTDIR}/buttons.o
+OBJECTFILES=${OBJECTDIR}/main.o ${OBJECTDIR}/m_uart.o ${OBJECTDIR}/buttons.o ${OBJECTDIR}/humidity_adc.o
 
 # Source Files
-SOURCEFILES=main.c m_uart.c buttons.c
+SOURCEFILES=main.c m_uart.c buttons.c humidity_adc.c
 
 
 
@@ -106,6 +106,12 @@ ${OBJECTDIR}/buttons.o: buttons.c  .generated_files/flags/default/89b95b387a4c00
 	@${RM} ${OBJECTDIR}/buttons.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1 -g -DDEBUG  -gdwarf-2  -x c -D__$(MP_PROCESSOR_OPTION)__   -mdfp="${DFP_DIR}/xc8"  -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fshort-enums -fno-common -funsigned-char -funsigned-bitfields -Wall -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD)  -gdwarf-3 -mconst-data-in-progmem -mno-const-data-in-config-mapped-progmem     -MD -MP -MF "${OBJECTDIR}/buttons.o.d" -MT "${OBJECTDIR}/buttons.o.d" -MT ${OBJECTDIR}/buttons.o -o ${OBJECTDIR}/buttons.o buttons.c 
 	
+${OBJECTDIR}/humidity_adc.o: humidity_adc.c  .generated_files/flags/default/adba014638cbfa5f3f5999ab802b4a92d343e91a .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/humidity_adc.o.d 
+	@${RM} ${OBJECTDIR}/humidity_adc.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1 -g -DDEBUG  -gdwarf-2  -x c -D__$(MP_PROCESSOR_OPTION)__   -mdfp="${DFP_DIR}/xc8"  -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fshort-enums -fno-common -funsigned-char -funsigned-bitfields -Wall -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD)  -gdwarf-3 -mconst-data-in-progmem -mno-const-data-in-config-mapped-progmem     -MD -MP -MF "${OBJECTDIR}/humidity_adc.o.d" -MT "${OBJECTDIR}/humidity_adc.o.d" -MT ${OBJECTDIR}/humidity_adc.o -o ${OBJECTDIR}/humidity_adc.o humidity_adc.c 
+	
 else
 ${OBJECTDIR}/main.o: main.c  .generated_files/flags/default/5ec9044d33c0580b57c2149f87884f66fc40c061 .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
 	@${MKDIR} "${OBJECTDIR}" 
@@ -124,6 +130,12 @@ ${OBJECTDIR}/buttons.o: buttons.c  .generated_files/flags/default/2db2a3ded0ba05
 	@${RM} ${OBJECTDIR}/buttons.o.d 
 	@${RM} ${OBJECTDIR}/buttons.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -x c -D__$(MP_PROCESSOR_OPTION)__   -mdfp="${DFP_DIR}/xc8"  -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fshort-enums -fno-common -funsigned-char -funsigned-bitfields -Wall -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD)  -gdwarf-3 -mconst-data-in-progmem -mno-const-data-in-config-mapped-progmem     -MD -MP -MF "${OBJECTDIR}/buttons.o.d" -MT "${OBJECTDIR}/buttons.o.d" -MT ${OBJECTDIR}/buttons.o -o ${OBJECTDIR}/buttons.o buttons.c 
+	
+${OBJECTDIR}/humidity_adc.o: humidity_adc.c  .generated_files/flags/default/f0094c8a57b52768b5c5e95674b0a5aa18e2e0a2 .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/humidity_adc.o.d 
+	@${RM} ${OBJECTDIR}/humidity_adc.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -x c -D__$(MP_PROCESSOR_OPTION)__   -mdfp="${DFP_DIR}/xc8"  -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fshort-enums -fno-common -funsigned-char -funsigned-bitfields -Wall -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD)  -gdwarf-3 -mconst-data-in-progmem -mno-const-data-in-config-mapped-progmem     -MD -MP -MF "${OBJECTDIR}/humidity_adc.o.d" -MT "${OBJECTDIR}/humidity_adc.o.d" -MT ${OBJECTDIR}/humidity_adc.o -o ${OBJECTDIR}/humidity_adc.o humidity_adc.c 
 	
 endif
 

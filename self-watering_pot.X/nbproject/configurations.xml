@@ -4,6 +4,9 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <itemPath>buttons.h</itemPath>
+      <itemPath>m_uart.h</itemPath>
+      <itemPath>humidity_adc.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -18,11 +21,10 @@
                    displayName="Source Files"
                    projectFiles="true">
       <itemPath>main.c</itemPath>
+      <itemPath>m_uart.c</itemPath>
+      <itemPath>buttons.c</itemPath>
+      <itemPath>humidity_adc.c</itemPath>
     </logicalFolder>
-    <itemPath>m_uart.c</itemPath>
-    <itemPath>m_uart.h</itemPath>
-    <itemPath>buttons.c</itemPath>
-    <itemPath>buttons.h</itemPath>
   </logicalFolder>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
