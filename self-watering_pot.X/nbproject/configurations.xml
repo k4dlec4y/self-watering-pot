@@ -19,6 +19,8 @@
                    projectFiles="true">
       <itemPath>main.c</itemPath>
     </logicalFolder>
+    <itemPath>m_uart.c</itemPath>
+    <itemPath>m_uart.h</itemPath>
   </logicalFolder>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
@@ -30,7 +32,7 @@
         <targetPluginBoard></targetPluginBoard>
         <platformTool>nEdbgTool</platformTool>
         <languageToolchain>XC8</languageToolchain>
-        <languageToolchainVersion>2.41</languageToolchainVersion>
+        <languageToolchainVersion>3.10</languageToolchainVersion>
         <platform>2</platform>
       </toolsSet>
       <packs>
