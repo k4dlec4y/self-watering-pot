@@ -1,3 +1,5 @@
+#include <assert.h>
+
 #include "m_uart.h"
 
 volatile uint8_t command = 0;
@@ -51,4 +53,10 @@ uint8_t uart_send_buffer(uint8_t *buf, uint8_t size)
 
     SREG = sreg;
     return 1;
+}
+
+uint8_t uart_send_newline(void)
+{
+    uint8_t newline[2] = {'\r', '\n'};
+    return uart_send_buffer(newline, sizeof(newline));
 }

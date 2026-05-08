@@ -23,6 +23,8 @@ void uart_init(void);
 
 uint8_t uart_send_buffer(uint8_t *buf, uint8_t size);
 
+uint8_t uart_send_newline(void);
+
 #ifdef	__cplusplus
 }
 #endif
