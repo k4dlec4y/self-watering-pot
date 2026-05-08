@@ -20,6 +20,8 @@ void portc_interrupt_init(void);
 
 void tcb_interrupt_init(void);
 
+int run_out_of_water(void);
+
 #ifdef	__cplusplus
 }
 #endif

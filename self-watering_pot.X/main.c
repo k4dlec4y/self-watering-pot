@@ -6,8 +6,8 @@
 #include "buttons.h"
 #include "humidity_adc.h"
 
-#define HUMIDITY_MESSAGE_SIZE 64
-uint8_t humidity_message[HUMIDITY_MESSAGE_SIZE];
+#define MESSAGE_SIZE 64
+uint8_t message[MESSAGE_SIZE];
 
 int main(void) {
 
@@ -33,11 +33,17 @@ int main(void) {
             uint16_t value = humidity_value;
             SREG = sreg;
 
-            int written = snprintf(humidity_message, HUMIDITY_MESSAGE_SIZE,
+            int written = snprintf(message, MESSAGE_SIZE,
                 "Humidity: %u\r\n", value);
             assert(written > 0);
 
-            uart_send_buffer(humidity_message, written);
+            uart_send_buffer(message, written);
+
+            written = snprintf(message, MESSAGE_SIZE,
+                "Run out of water: %s\r\n", run_out_of_water() ? "yes" : "no");
+            assert(written > 0);
+
+            uart_send_buffer(message, written);
         }
     }
 }
