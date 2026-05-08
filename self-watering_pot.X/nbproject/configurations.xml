@@ -21,6 +21,8 @@
     </logicalFolder>
     <itemPath>m_uart.c</itemPath>
     <itemPath>m_uart.h</itemPath>
+    <itemPath>buttons.c</itemPath>
+    <itemPath>buttons.h</itemPath>
   </logicalFolder>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
