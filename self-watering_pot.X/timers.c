@@ -77,7 +77,7 @@ void send_status(void)
     uart_send_buffer(message, written);
 
     written = snprintf(message, MESSAGE_SIZE, "Humidity: %.2f\r\n",
-        1.0 - ((float)hum) / 1023);
+        ((float)hum) / 1023);
     assert(written > 0);
     uart_send_buffer(message, written);
 

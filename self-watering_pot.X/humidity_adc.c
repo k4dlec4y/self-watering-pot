@@ -1,10 +1,11 @@
 #include <avr/interrupt.h>
 
-volatile uint16_t humidity_value = 0;
+volatile uint16_t humidity_value = 1023;
 
 ISR(ADC0_RESRDY_vect, ISR_BLOCK)
 {
-    humidity_value = ADC0.RES;
+    // 1023 is the driest point
+    humidity_value = 1023 - ADC0.RES;
 }
 
 void humidity_adc_init(void)

@@ -5,6 +5,9 @@
 #include "humidity_adc.h"
 #include "timers.h"
 
+// 1 / 10 of the maximum
+#define HUMIDITY_THRESHOLD 102
+
 int main(void) {
 
     cli(); //disable interrupts global
@@ -22,7 +25,8 @@ int main(void) {
     sei(); //enable interrupts global
 
     while (1) {
-        if (button_pressed) {
+        if ((button_pressed || humidity_value < HUMIDITY_THRESHOLD)
+            && !run_out_of_water()) {
             start_pump();
         }
         if (status) {
