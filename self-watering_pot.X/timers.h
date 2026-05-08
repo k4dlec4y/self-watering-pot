@@ -1,0 +1,30 @@
+/* 
+ * File:   status.h
+ * Author: k4dlec4y
+ *
+ * Created on May 8, 2026, 9:30 PM
+ */
+
+#ifndef TIMERS_H
+#define	TIMERS_H
+
+#ifdef	__cplusplus
+extern "C" {
+#endif
+
+#include <avr/interrupt.h>
+
+extern volatile uint8_t status;
+
+void timers_init(void);
+
+void start_pump(void);
+
+void send_status(void);
+
+#ifdef	__cplusplus
+}
+#endif
+
+#endif	/* TIMERS_H */
+

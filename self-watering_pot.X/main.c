@@ -1,13 +1,9 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
-#include <stdio.h>
-#include <assert.h>
 #include "m_uart.h"
 #include "buttons.h"
 #include "humidity_adc.h"
-
-#define MESSAGE_SIZE 64
-uint8_t message[MESSAGE_SIZE];
+#include "timers.h"
 
 int main(void) {
 
@@ -21,29 +17,17 @@ int main(void) {
     portc_interrupt_init();
     tcb_interrupt_init();
     humidity_adc_init();
+    timers_init();
 
     sei(); //enable interrupts global
 
     while (1) {
         if (button_pressed) {
-            button_pressed = 0;
-
-            uint8_t sreg = SREG;
-            cli();
-            uint16_t value = humidity_value;
-            SREG = sreg;
-
-            int written = snprintf(message, MESSAGE_SIZE,
-                "Humidity: %u\r\n", value);
-            assert(written > 0);
-
-            uart_send_buffer(message, written);
-
-            written = snprintf(message, MESSAGE_SIZE,
-                "Run out of water: %s\r\n", run_out_of_water() ? "yes" : "no");
-            assert(written > 0);
-
-            uart_send_buffer(message, written);
+            start_pump();
+        }
+        if (status) {
+            status = 0;
+            send_status();
         }
     }
 }

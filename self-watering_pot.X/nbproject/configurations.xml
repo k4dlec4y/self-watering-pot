@@ -7,6 +7,7 @@
       <itemPath>buttons.h</itemPath>
       <itemPath>m_uart.h</itemPath>
       <itemPath>humidity_adc.h</itemPath>
+      <itemPath>timers.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -24,6 +25,7 @@
       <itemPath>m_uart.c</itemPath>
       <itemPath>buttons.c</itemPath>
       <itemPath>humidity_adc.c</itemPath>
+      <itemPath>timers.c</itemPath>
     </logicalFolder>
   </logicalFolder>
   <projectmakefile>Makefile</projectmakefile>
