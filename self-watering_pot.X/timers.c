@@ -49,7 +49,7 @@ ISR(RTC_PIT_vect, ISR_BLOCK)
 
 void pump_init(void)
 {
-    PORTE.DIRSET = PIN1_bm;
+    PORTE.DIRSET = PIN0_bm;
 }
 
 void pump_on(void)
