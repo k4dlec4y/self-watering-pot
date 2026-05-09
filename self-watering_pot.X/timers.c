@@ -62,7 +62,7 @@ void start_pump(void) {
     }
 }
 
-#define MESSAGE_SIZE 64
+#define MESSAGE_SIZE 128
 uint8_t message[MESSAGE_SIZE];
 
 void send_status(void)
@@ -78,23 +78,15 @@ void send_status(void)
     SREG = sreg;
 
     int written = snprintf(message, MESSAGE_SIZE,
-        "Time since last watering: %" PRIu64 "h, %" PRIu64 "m, %" PRIu64 " s\r\n",
+        "[INFO] Time since last watering: %" PRIu64 "h, %" PRIu64 "m, %" PRIu64 " s\r\n",
         water_time / 3600, water_time / 60 % 60, water_time % 60);
     assert(written > 0);
     uart_send_buffer(message, written);
 
-    written = snprintf(message, MESSAGE_SIZE, "Moisture: %.2f\r\n",
-        ((float)moisture) / MOISTURE_MAX);
-    assert(written > 0);
-    uart_send_buffer(message, written);
-
     written = snprintf(message, MESSAGE_SIZE,
-        "Run out of water: %s\r\n", water_status ? "yes" : "no");
-    assert(written > 0);
-    uart_send_buffer(message, written);
-
-    written = snprintf(message, MESSAGE_SIZE,
-        "Pump is active: %s\r\n\r\n", pump ? "yes" : "no");
+        "[INFO] Moisture: %d%% -- Reservoir: %s -- Pump: %s\r\n",
+        moisture * 100 / MOISTURE_MAX, water_status ? "EMPTY" : "OK",
+        pump ? "ON" : "OFF");
     assert(written > 0);
     uart_send_buffer(message, written);
 }
