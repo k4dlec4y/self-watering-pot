@@ -36,7 +36,9 @@ ISR(RTC_PIT_vect, ISR_BLOCK) {
 
     if (pump_active) {
         pump_timer++;
-        if (pump_timer >= PUMP_ACTIVE_PERIOD) {
+        if (pump_timer >= PUMP_ACTIVE_PERIOD ||
+            run_out_of_water())
+        {
             PORTE.OUTCLR = PIN0_bm;
             pump_active = 0;
             pump_timer = 0;
