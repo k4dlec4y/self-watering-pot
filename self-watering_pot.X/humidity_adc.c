@@ -1,11 +1,12 @@
 #include <avr/interrupt.h>
+#include "config.h"
 
-volatile uint16_t humidity_value = 1023;
+volatile uint16_t humidity_value = HUMIDITY_MAX;
 
 ISR(ADC0_RESRDY_vect, ISR_BLOCK)
 {
-    // 1023 is the driest point
-    humidity_value = 1023 - ADC0.RES;
+    // sensor returns the highest voltage if dry
+    humidity_value = HUMIDITY_MAX - ADC0.RES;
 }
 
 void humidity_adc_init(void)

@@ -8,6 +8,7 @@
       <itemPath>m_uart.h</itemPath>
       <itemPath>humidity_adc.h</itemPath>
       <itemPath>timers.h</itemPath>
+      <itemPath>config.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

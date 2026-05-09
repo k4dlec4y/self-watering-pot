@@ -4,9 +4,7 @@
 #include "buttons.h"
 #include "humidity_adc.h"
 #include "timers.h"
-
-// 1 / 10 of the maximum
-#define HUMIDITY_THRESHOLD 102
+#include "config.h"
 
 int main(void) {
 

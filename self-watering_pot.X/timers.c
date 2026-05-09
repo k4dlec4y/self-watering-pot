@@ -5,6 +5,7 @@
 #include "m_uart.h"
 #include "buttons.h"
 #include "humidity_adc.h"
+#include "config.h"
 
 volatile uint8_t status = 0;
 volatile uint64_t seconds_from_start = 0;
@@ -28,19 +29,19 @@ ISR(RTC_PIT_vect, ISR_BLOCK) {
     seconds_from_start++;
 
     status_timer++;
-    if (status_timer >= 5) {
+    if (status_timer >= STATUS_PERIOD) {
         status_timer = 0;
         status = 1;
     }
 
     if (pump_active) {
         pump_timer++;
-        if (pump_timer >= 10) {
+        if (pump_timer >= PUMP_ACTIVE_PERIOD) {
             PORTE.OUTCLR = PIN0_bm;
             pump_active = 0;
             pump_timer = 0;
 
-            lockout_timer = 600; 
+            lockout_timer = PUMP_LOCKOUT_PERIOD; 
         }
     }
 
@@ -77,7 +78,7 @@ void send_status(void)
     uart_send_buffer(message, written);
 
     written = snprintf(message, MESSAGE_SIZE, "Humidity: %.2f\r\n",
-        ((float)hum) / 1023);
+        ((float)hum) / HUMIDITY_MAX);
     assert(written > 0);
     uart_send_buffer(message, written);
 
