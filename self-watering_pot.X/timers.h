@@ -16,9 +16,13 @@ extern "C" {
 
 extern volatile uint8_t status;
 
-void timers_init(void);
+void rtc_timer_init(void);
 
-void start_pump(void);
+void pump_init(void);
+
+void pump_on(void);
+
+void pump_off(void);
 
 void send_status(void);
 

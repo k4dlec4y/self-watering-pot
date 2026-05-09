@@ -10,11 +10,13 @@ volatile uint8_t head = 0;
 volatile uint8_t tail = 0;
 volatile uint8_t empty_size = SIZE;   
 
-ISR(USART3_RXC_vect, ISR_BLOCK) {
+ISR(USART3_RXC_vect, ISR_BLOCK)
+{
     command = USART3.RXDATAL;
 }
 
-ISR(USART3_DRE_vect, ISR_BLOCK) {
+ISR(USART3_DRE_vect, ISR_BLOCK)
+{
     if (tail != head) {
         USART3.TXDATAL = buffer[tail];
         tail = (tail + 1) % SIZE;

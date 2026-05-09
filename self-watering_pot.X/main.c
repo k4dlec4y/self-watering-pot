@@ -1,13 +1,13 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include "m_uart.h"
-#include "buttons.h"
+#include "gpio_utils.h"
 #include "moisture_adc.h"
 #include "timers.h"
 #include "config.h"
 
-int main(void) {
-
+int main(void)
+{
     cli(); //disable interrupts global
 
     // set clock prescaler to 0: CPU runs at 20MHz
@@ -15,17 +15,21 @@ int main(void) {
     CLKCTRL.MCLKCTRLB = 0x00;
 
     uart_init();
-    portc_interrupt_init();
-    tcb_interrupt_init();
+    button_init();
+    swimmer_init();
+    pump_init();
     moisture_adc_init();
-    timers_init();
+    rtc_timer_init();
 
     sei(); //enable interrupts global
 
     while (1) {
-        if ((button_pressed || moisture_value < MOISTURE_THRESHOLD)
-            && !run_out_of_water()) {
-            start_pump();
+        if (button_pressed) {
+            button_pressed = 0;
+            pump_on();
+        }
+        if (moisture_value < MOISTURE_THRESHOLD) {
+            pump_on();
         }
         if (status) {
             status = 0;

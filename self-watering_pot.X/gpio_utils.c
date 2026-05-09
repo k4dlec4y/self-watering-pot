@@ -1,18 +1,12 @@
-#include "buttons.h"
+#include "gpio_utils.h"
 
 volatile uint8_t button_pressed = 0;
 
-void portc_interrupt_init(void)
+void button_init(void)
 {
-    PORTC.DIR = 0x00;
-    // button
+    PORTC.DIRCLR = PIN0_bm;
     PORTC.PIN0CTRL = PORT_PULLUPEN_bm | PORT_ISC_FALLING_gc;
-    // swimmer
-    PORTD.PIN1CTRL = PORT_PULLUPEN_bm | PORT_ISC_INTDISABLE_gc;
-}
 
-void tcb_interrupt_init(void)
-{
     TCA0.SINGLE.CTRLA = TCA_SINGLE_CLKSEL_DIV4_gc | TCA_SINGLE_ENABLE_bm;
     /* should be 10 ms */
     TCB0.CCMP = 50000;
@@ -20,7 +14,14 @@ void tcb_interrupt_init(void)
     TCB0.CTRLA = TCB_CLKSEL_CLKTCA_gc;
 }
 
-ISR(PORTC_PORT_vect, ISR_BLOCK) {
+void swimmer_init(void)
+{
+    PORTD.DIRCLR = PIN1_bm;
+    PORTD.PIN1CTRL = PORT_PULLUPEN_bm | PORT_ISC_INTDISABLE_gc;
+}
+
+ISR(PORTC_PORT_vect, ISR_BLOCK)
+{
     if (PORTC.INTFLAGS & PIN0_bm) {
         PORTC.INTFLAGS |= PIN0_bm;
     }
@@ -28,7 +29,8 @@ ISR(PORTC_PORT_vect, ISR_BLOCK) {
     TCB0.CTRLA |= TCB_ENABLE_bm;
 }
 
-ISR(TCB0_INT_vect, ISR_BLOCK) {
+ISR(TCB0_INT_vect, ISR_BLOCK)
+{
     TCB0.INTFLAGS |= TCB_CAPT_bm;
     TCB0.CTRLA &= ~TCB_ENABLE_bm;
 

@@ -17,6 +17,7 @@ extern "C" {
 // to access the uart from PC:
 // tio /dev/ttyACM0 -b 9600
 
+// not used right now, but might come in handy in the future
 extern volatile uint8_t command;  
 
 void uart_init(void);

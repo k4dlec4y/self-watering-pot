@@ -4,11 +4,11 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
-      <itemPath>buttons.h</itemPath>
       <itemPath>m_uart.h</itemPath>
       <itemPath>timers.h</itemPath>
       <itemPath>config.h</itemPath>
       <itemPath>moisture_adc.h</itemPath>
+      <itemPath>gpio_utils.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -24,9 +24,9 @@
                    projectFiles="true">
       <itemPath>main.c</itemPath>
       <itemPath>m_uart.c</itemPath>
-      <itemPath>buttons.c</itemPath>
       <itemPath>timers.c</itemPath>
       <itemPath>moisture_adc.c</itemPath>
+      <itemPath>gpio_utils.c</itemPath>
     </logicalFolder>
   </logicalFolder>
   <projectmakefile>Makefile</projectmakefile>

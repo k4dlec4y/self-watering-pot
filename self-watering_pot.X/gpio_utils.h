@@ -1,12 +1,12 @@
 /* 
- * File:   buttons.h
+ * File:   gpio_utils.h
  * Author: k4dlec4y
  *
  * Created on May 8, 2026, 1:34 PM
  */
 
-#ifndef BUTTONS_H
-#define	BUTTONS_H
+#ifndef GPIO_UTILS_H
+#define	GPIO_UTILS_H
 
 #ifdef	__cplusplus
 extern "C" {
@@ -16,9 +16,9 @@ extern "C" {
 
 extern volatile uint8_t button_pressed;
 
-void portc_interrupt_init(void);
+void button_init(void);
 
-void tcb_interrupt_init(void);
+void swimmer_init(void);
 
 int run_out_of_water(void);
 
@@ -26,4 +26,4 @@ int run_out_of_water(void);
 }
 #endif
 
-#endif	/* BUTTONS_H */
+#endif	/* GPIO_UTILS_H */

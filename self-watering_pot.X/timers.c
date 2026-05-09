@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <inttypes.h>
 #include "m_uart.h"
-#include "buttons.h"
+#include "gpio_utils.h"
 #include "moisture_adc.h"
 #include "config.h"
 
@@ -15,7 +15,7 @@ volatile uint16_t pump_timer = 0;
 volatile int16_t lockout_timer = 0;
 volatile uint8_t pump_active = 0;
 
-void timers_init(void)
+void rtc_timer_init(void)
 {
     while (RTC.PITSTATUS & RTC_CTRLABUSY_bm);
 
@@ -24,7 +24,8 @@ void timers_init(void)
     RTC.PITCTRLA = RTC_PERIOD_CYC32768_gc | RTC_PITEN_bm;
 }
 
-ISR(RTC_PIT_vect, ISR_BLOCK) {
+ISR(RTC_PIT_vect, ISR_BLOCK)
+{
     RTC.PITINTFLAGS = RTC_PI_bm;
 
     seconds_from_start++;
@@ -32,21 +33,13 @@ ISR(RTC_PIT_vect, ISR_BLOCK) {
     status_timer++;
     if (status_timer >= STATUS_PERIOD) {
         status_timer = 0;
-        status = 1;
+        status = 1; 
     }
 
     if (pump_active) {
         pump_timer++;
-        if (pump_timer >= PUMP_ACTIVE_PERIOD ||
-            run_out_of_water())
-        {
-            PORTE.OUTCLR = PIN0_bm;
-            pump_active = 0;
-            pump_timer = 0;
-            time_since_last_watering = seconds_from_start;
-
-            lockout_timer = PUMP_LOCKOUT_PERIOD; 
-        }
+        if (pump_timer >= PUMP_ACTIVE_PERIOD || run_out_of_water())
+            pump_off();
     }
 
     if (lockout_timer > 0) {
@@ -54,12 +47,28 @@ ISR(RTC_PIT_vect, ISR_BLOCK) {
     }
 }
 
-void start_pump(void) {
-    if (lockout_timer <= 0 && !pump_active) {
+void pump_init(void)
+{
+    PORTE.DIRSET = PIN1_bm;
+}
+
+void pump_on(void)
+{
+    if (lockout_timer <= 0 && !pump_active && !run_out_of_water()) {
         PORTE.OUTSET = PIN0_bm;
         pump_active = 1;
         pump_timer = 0;
     }
+}
+
+void pump_off(void)
+{
+    PORTE.OUTCLR = PIN0_bm;
+    pump_active = 0;
+    pump_timer = 0;
+    time_since_last_watering = seconds_from_start;
+
+    lockout_timer = PUMP_LOCKOUT_PERIOD; 
 }
 
 #define MESSAGE_SIZE 128
