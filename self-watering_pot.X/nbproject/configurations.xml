@@ -6,9 +6,9 @@
                    projectFiles="true">
       <itemPath>buttons.h</itemPath>
       <itemPath>m_uart.h</itemPath>
-      <itemPath>humidity_adc.h</itemPath>
       <itemPath>timers.h</itemPath>
       <itemPath>config.h</itemPath>
+      <itemPath>moisture_adc.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -25,8 +25,8 @@
       <itemPath>main.c</itemPath>
       <itemPath>m_uart.c</itemPath>
       <itemPath>buttons.c</itemPath>
-      <itemPath>humidity_adc.c</itemPath>
       <itemPath>timers.c</itemPath>
+      <itemPath>moisture_adc.c</itemPath>
     </logicalFolder>
   </logicalFolder>
   <projectmakefile>Makefile</projectmakefile>

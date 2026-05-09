@@ -2,7 +2,7 @@
 #include <avr/interrupt.h>
 #include "m_uart.h"
 #include "buttons.h"
-#include "humidity_adc.h"
+#include "moisture_adc.h"
 #include "timers.h"
 #include "config.h"
 
@@ -17,13 +17,13 @@ int main(void) {
     uart_init();
     portc_interrupt_init();
     tcb_interrupt_init();
-    humidity_adc_init();
+    moisture_adc_init();
     timers_init();
 
     sei(); //enable interrupts global
 
     while (1) {
-        if ((button_pressed || humidity_value < HUMIDITY_THRESHOLD)
+        if ((button_pressed || moisture_value < MOISTURE_THRESHOLD)
             && !run_out_of_water()) {
             start_pump();
         }

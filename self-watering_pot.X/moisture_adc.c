@@ -1,15 +1,15 @@
 #include <avr/interrupt.h>
 #include "config.h"
 
-volatile uint16_t humidity_value = HUMIDITY_MAX;
+volatile uint16_t moisture_value = MOISTURE_MAX;
 
 ISR(ADC0_RESRDY_vect, ISR_BLOCK)
 {
     // sensor returns the highest voltage if dry
-    humidity_value = HUMIDITY_MAX - ADC0.RES;
+    moisture_value = MOISTURE_MAX - ADC0.RES;
 }
 
-void humidity_adc_init(void)
+void moisture_adc_init(void)
 {
     /* turn off digital */
     /* PORTDPIN0 = AIN0 = POT2*/

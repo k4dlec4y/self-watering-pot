@@ -4,7 +4,7 @@
 #include <inttypes.h>
 #include "m_uart.h"
 #include "buttons.h"
-#include "humidity_adc.h"
+#include "moisture_adc.h"
 #include "config.h"
 
 volatile uint8_t status = 0;
@@ -69,7 +69,7 @@ void send_status(void)
     cli();
     uint64_t time = seconds_from_start;
     uint8_t pump = pump_active;
-    uint16_t hum = humidity_value;
+    uint16_t moisture = moisture_value;
     uint8_t water_status = run_out_of_water();
     SREG = sreg;
 
@@ -79,8 +79,8 @@ void send_status(void)
     assert(written > 0);
     uart_send_buffer(message, written);
 
-    written = snprintf(message, MESSAGE_SIZE, "Humidity: %.2f\r\n",
-        ((float)hum) / HUMIDITY_MAX);
+    written = snprintf(message, MESSAGE_SIZE, "Moisture: %.2f\r\n",
+        ((float)moisture) / MOISTURE_MAX);
     assert(written > 0);
     uart_send_buffer(message, written);
 

@@ -12,9 +12,9 @@
 extern "C" {
 #endif
 
-#define HUMIDITY_THRESHOLD 102
-#define HUMIDITY_MAX 1023
-    
+#define MOISTURE_THRESHOLD 102
+#define MOISTURE_MAX 1023
+
 #define STATUS_PERIOD 1
 #define PUMP_ACTIVE_PERIOD 10
 #define PUMP_LOCKOUT_PERIOD 600
