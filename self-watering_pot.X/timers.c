@@ -49,13 +49,21 @@ ISR(RTC_PIT_vect, ISR_BLOCK)
 
 void pump_init(void)
 {
-    PORTE.DIRSET = PIN0_bm;
+    PORTD.DIRSET = PIN6_bm;
+    PORTD.OUTCLR = PIN6_bm;
 }
 
-void pump_on(void)
+void pump_on_auto(void)
 {
-    if (lockout_timer <= 0 && !pump_active && !run_out_of_water()) {
-        PORTE.OUTSET = PIN0_bm;
+    if (lockout_timer <= 0) {
+        pump_on_button();
+    }
+}
+
+void pump_on_button(void)
+{
+    if (!pump_active && !run_out_of_water()) {
+        PORTD.OUTSET = PIN6_bm;
         pump_active = 1;
         pump_timer = 0;
     }
@@ -63,12 +71,12 @@ void pump_on(void)
 
 void pump_off(void)
 {
-    PORTE.OUTCLR = PIN0_bm;
+    PORTD.OUTCLR = PIN6_bm;
     pump_active = 0;
     pump_timer = 0;
     time_since_last_watering = seconds_from_start;
 
-    lockout_timer = PUMP_LOCKOUT_PERIOD; 
+    lockout_timer = PUMP_LOCKOUT_PERIOD;
 }
 
 #define MESSAGE_SIZE 128

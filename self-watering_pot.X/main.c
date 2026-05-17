@@ -14,10 +14,10 @@ int main(void)
     CPU_CCP = CCP_IOREG_gc;
     CLKCTRL.MCLKCTRLB = 0x00;
 
+    pump_init();
     uart_init();
     button_init();
     swimmer_init();
-    pump_init();
     moisture_adc_init();
     rtc_timer_init();
 
@@ -26,10 +26,10 @@ int main(void)
     while (1) {
         if (button_pressed) {
             button_pressed = 0;
-            pump_on();
+            pump_on_button();
         }
         if (moisture_value < MOISTURE_THRESHOLD) {
-            pump_on();
+            pump_on_auto();
         }
         if (status) {
             status = 0;

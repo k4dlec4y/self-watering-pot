@@ -11,7 +11,7 @@ This project implements intelligent water pump control based on soil moisture le
 - 1x Float Switch (Swimmer) (Magnetic reed switch type)
 - 1x Momentary Push Button
 - 1x Small Water Pump (3V – 6V)
-- 1x 5V Relay Module or N-Channel MOSFET (e.g., IRF540) to drive the pump
+- 1x 5V MOSFET (e.g., IRF540) to drive the pump
 - 1x USB Cable for power (VBUS) and programming
 
 ## Installation
@@ -39,10 +39,12 @@ If you are using linux and tio is installed, you can also use script launch_cons
 
 | Component          | MCU Pin | Code Configuration                        | Note                                                        |
 |--------------------|---------|-------------------------------------------|-------------------------------------------------------------|
-| External Button    | PC0     | Input, Internal PULLUP enabled            | Activates the pump manually (if conditions are met)         |
-| Swimmer (Float)    | PD1     | Input, Internal PULLUP enabled            | Detects empty water tank                                    |
 | Moisture Sensor    | PD0     | Analog Input (AIN0), Digital Input Off    | Measures soil moisture (0 - 1023)                           |
-| Water Pump         | PE0     | Digital Output                            | MUST use a relay or transistor                              |
+| External Button    | PD2     | Input, Internal PULLUP enabled            | Activates the pump manually (if conditions are met)         |
+| Swimmer (Float)    | PD4     | Input, Internal PULLUP enabled            | Detects empty water tank                                    |
+| Water Pump         | PD6     | Digital Output                            | MUST use a relay or transistor                              |
+
+![Hardware Showcase](docs/self-watering_pot_hw.jpg)
 
 ## License
 This project is licensed under the MIT License – see the LICENSE file for details.

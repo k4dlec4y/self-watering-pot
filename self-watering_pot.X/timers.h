@@ -20,7 +20,8 @@ void rtc_timer_init(void);
 
 void pump_init(void);
 
-void pump_on(void);
+void pump_on_auto(void);
+void pump_on_button(void);
 
 void pump_off(void);
 

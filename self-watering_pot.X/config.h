@@ -15,8 +15,8 @@ extern "C" {
 #define MOISTURE_THRESHOLD 102
 #define MOISTURE_MAX 1023
 
-#define STATUS_PERIOD 3
-#define PUMP_ACTIVE_PERIOD 10
+#define STATUS_PERIOD 1
+#define PUMP_ACTIVE_PERIOD 3
 #define PUMP_LOCKOUT_PERIOD 600
 
 #ifdef	__cplusplus
